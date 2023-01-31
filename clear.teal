@@ -1,0 +1,47 @@
+#pragma version 5
+int 0
+global CurrentApplicationID
+byte "voted"
+app_local_get_ex
+store 1
+store 0
+load 1
+global LatestTimestamp
+byte "VoteEnd"
+app_global_get
+<=
+&&
+bz main_l2
+byte "TotalCountRed"
+byte "TotalCountRed"
+app_global_get
+int 0
+byte "votedRed"
+app_local_get
+-
+app_global_put
+byte "TotalCountYellow"
+byte "TotalCountYellow"
+app_global_get
+int 0
+byte "votedYellow"
+app_local_get
+-
+app_global_put
+byte "TotalCountBlue"
+byte "TotalCountBlue"
+app_global_get
+int 0
+byte "votedBlue"
+app_local_get
+-
+app_global_put
+byte "TotalUsers"
+byte "TotalUsers"
+app_global_get
+int 1
+-
+app_global_put
+main_l2:
+int 1
+return
