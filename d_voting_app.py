@@ -1,4 +1,5 @@
-#This smart contract automates a decentralised voting application
+#This smart contract automates a decentralised voting application.It is an improvement from the voting app smart contract 
+#which can be found in the following website: https://developer.algorand.org/articles/creating-stateful-algorand-smart-contracts-python-pyteal/
 from pyteal import *
 
 def approval_program():
