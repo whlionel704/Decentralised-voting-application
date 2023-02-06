@@ -12,6 +12,18 @@ The pyteal code in the smart contract is specifically targeting the following re
 
 
 
+Some distinctive features of this smart contract:
+
+ 1) update_timeFrame function 
+
+ 2) update_scores function
+
+ 3) global state to track the total number of users which have voted. This ensures that we cannot have more voters than the specified maximum number of voters as initialised in the global state: Bytes("TotalUsers").
+
+ 4) Instead of simply voting for 3 colours, each employee is given a score of 10 to be distributed among the 3 colours in any way he or she wants.
+
+
+
 Let's now relate this real life scenario to the functions written in the Pyteal smart contract. 
 
 
@@ -55,18 +67,6 @@ Approval Program:-
 Clear State Program:-
 
   Just like the on_closeout This will allow the employee to opt out. But the main difference is that the transaction records of that employee will be erased.
-
-
-
-Some distinctive features of this smart contract:
-
- 1) update_timeFrame function 
-
- 2) update_scores function
-
- 3) global state to track the total number of users which have voted. This ensures that we cannot have more voters than the specified maximum number of voters as initialised in the global state: Bytes("TotalUsers").
-
- 4) Instead of simply voting for 3 colours, each employee is given a score of 10 to be distributed among the 3 colours in any way he or she wants.
 
  
 
