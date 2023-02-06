@@ -1,7 +1,7 @@
 #This smart contract automates a decentralised voting application. It is an improvement from the voting app smart contract 
 #which can be found in the following website: https://developer.algorand.org/articles/creating-stateful-algorand-smart-contracts-python-pyteal/
 
-#Last used App id from the testnet: 156791600
+#APP ID from the testnet: 156791600
 
 from pyteal import *
 
