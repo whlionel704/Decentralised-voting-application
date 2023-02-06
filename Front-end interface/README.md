@@ -1,4 +1,4 @@
-# AlgoHUB - Counter App Template
+# Setting up the React Front-end user interface
 
 This project repository is a template used for our 2nd Algorand Lab, [Deploying to Testnet and Interacting with Smart Contracts in the Browser](https://github.com/Algo-Hub-io/pyteal-course/Lab2).
 
