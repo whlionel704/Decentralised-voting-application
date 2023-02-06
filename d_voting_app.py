@@ -1,5 +1,6 @@
 #This smart contract automates a decentralised voting application. It is an improvement from the voting app smart contract 
 #which can be found in the following website: https://developer.algorand.org/articles/creating-stateful-algorand-smart-contracts-python-pyteal/
+
 from pyteal import *
 
 def approval_program():
@@ -52,7 +53,7 @@ def approval_program():
             App.globalPut(Bytes("TotalCountRed"), App.globalGet(Bytes("TotalCountRed")) - App.localGet(Int(0), Bytes("votedRed"))),
             App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) - App.localGet(Int(0), Bytes("votedYellow"))),
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) - App.localGet(Int(0), Bytes("votedBlue"))),
-            App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) - Int(1)),
+            App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) + Int(1)),
         ])),
         Return(Int(1))
     ])
@@ -95,7 +96,7 @@ def approval_program():
         #the total score for the 3 colors must be equal to 10
         Assert(choiceRed + choiceYellow + choiceBlue == Int(10)),
 
-        #gets the vote scores
+        #Makes sure that the user has not voted yet. This avoids double voting
         If(voted_or_not.hasValue(), Return(Int(0))),
         
         App.globalPut(Bytes("TotalCountRed"), choice_tally_Red + choiceRed), 
@@ -107,6 +108,7 @@ def approval_program():
 
 
         #update local state - the user has already voted
+        App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) - Int(1)),
         App.localPut(Int(0), Bytes("voted"), Int(1)),
         Return(Int(1))
     ])
@@ -138,7 +140,7 @@ def clear_state_program():
             App.globalPut(Bytes("TotalCountRed"), App.globalGet(Bytes("TotalCountRed")) - App.localGet(Int(0), Bytes("votedRed"))),
             App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) - App.localGet(Int(0), Bytes("votedYellow"))),
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) - App.localGet(Int(0), Bytes("votedBlue"))),
-            App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) - Int(1)),
+            App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) + Int(1)),
         ])),
 
         Return(Int(1))
