@@ -53,6 +53,7 @@ def approval_program():
             App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) - App.localGet(Int(0), Bytes("votedYellow"))),
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) - App.localGet(Int(0), Bytes("votedBlue"))),
             App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) + Int(1)),
+            App.localPut(Int(0), Bytes("voted"), Int(0))
         ])),
         Return(Int(1))
     ])
@@ -95,7 +96,7 @@ def approval_program():
         #the total score for the 3 colors must be equal to 10
         Assert(choiceRed + choiceYellow + choiceBlue == Int(10)),
 
-        #Makes sure that the user has not voted yet. This avoids double voting
+        #gets the vote scores
         If(voted_or_not.hasValue(), Return(Int(0))),
         
         App.globalPut(Bytes("TotalCountRed"), choice_tally_Red + choiceRed), 
@@ -140,6 +141,7 @@ def clear_state_program():
             App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) - App.localGet(Int(0), Bytes("votedYellow"))),
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) - App.localGet(Int(0), Bytes("votedBlue"))),
             App.globalPut(Bytes("TotalUsers"), App.globalGet(Bytes("TotalUsers")) + Int(1)),
+            App.localPut(Int(0), Bytes("voted"), Int(0))
         ])),
 
         Return(Int(1))
