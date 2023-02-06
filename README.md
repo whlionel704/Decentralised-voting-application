@@ -28,3 +28,5 @@ Approval Program:-
 
  Clear State Program:-
   Just like the on_closeout This will allow the employee to opt out. But the main difference is that the transaction records of that employee will be erased.
+ 
+ This smart contract also comes with a frontend user interface. Using the same application ID and by following the instructions in the 'README.md' file inside the 'Front-end interface' folder of this repository, it allows an employee to connect his or her perawallet to take part in the voting process in a user-friendly way.
