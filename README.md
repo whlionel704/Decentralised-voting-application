@@ -44,13 +44,13 @@ Clear State Program:-
 
 Some distinctive features of this smart contract:
 
- 1.update_timeFrame function 
+ 1) update_timeFrame function 
 
- 2.update_scores function
+ 2) update_scores function
 
- 3.global state to track the total number of users which have voted. This ensures that we cannot have more voters than the specified maximum number of voters as initialised in the global state: Bytes("TotalUsers").
+ 3) global state to track the total number of users which have voted. This ensures that we cannot have more voters than the specified maximum number of voters as initialised in the global state: Bytes("TotalUsers").
 
- 4.Instead of simply voting for 3 colours, each employee is given a score of 10 to be distributed among the 3 colours in any way he or she wants.
- 
+ 4) Instead of simply voting for 3 colours, each employee is given a score of 10 to be distributed among the 3 colours in any way he or she wants.
+
  
  This smart contract also comes with a frontend user interface. Using the same application ID and by following the instructions in the 'README.md' file inside the 'Front-end interface' folder of this repository, it allows an employee to connect his or her perawallet to take part in the voting process in a user-friendly way.
