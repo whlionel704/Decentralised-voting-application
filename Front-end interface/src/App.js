@@ -18,13 +18,9 @@ const algod = new algosdk.Algodv2('','https://testnet-api.algonode.cloud', 443);
 
 function App() {
   const [accountAddress, setAccountAddress] = useState(null);
-  //const [currentCount, setCurrentCount] = useState(null);
-  //const [localCount, setLocalCount] = useState(null);
   const isConnectedToPeraWallet = !!accountAddress;
 
   useEffect(() => {
-    //checkCounterState();
-    // checkLocalCounterState();
     // reconnect to session when the component is mounted
     peraWallet.reconnectSession().then((accounts) => {
       // Setup disconnect event listener
@@ -185,33 +181,6 @@ function App() {
         const result = await waitForConfirmation(algod, txId, 2);
     }
 
-    /*async function checkCounterState() {
-      try {
-        const counter = await algod.getApplicationByID(appIndex).do();
-        if (!!counter.params['global-state'][0].value.uint) {
-          setCurrentCount(counter.params['global-state'][0].value.uint);
-        } else {
-          setCurrentCount(0);
-        }
-      } catch (e) {
-        console.error('There was an error connecting to the algorand node: ', e)
-      }
-    }*/
-
-    /*async function checkLocalCounterState() {
-      try {
-        const accountInfo = await algod.accountApplicationInformation(accountAddress,appIndex).do();
-        if (!!accountInfo['app-local-state']['key-value'][0].value.uint) {
-          setLocalCount(accountInfo['app-local-state']['key-value'][0].value.uint);
-        } else {
-          setLocalCount(0);
-        }
-        console.log(accountInfo['app-local-state']['key-value'][0].value.uint);
-      } catch (e) {
-        console.error('There was an error connecting to the algorand node: ', e)
-      }
-    }*/
-
     async function callCounterApplication(action) {
       try {
         // get suggested params
@@ -235,8 +204,6 @@ function App() {
         console.log(signedTx);
         const { txId } = await algod.sendRawTransaction(signedTx).do();
         const result = await waitForConfirmation(algod, txId, 2);
-        //checkCounterState();
-        //checkLocalCounterState();
       
       } catch (e) {
         console.error(`There was an error calling the counter app: ${e}`);
