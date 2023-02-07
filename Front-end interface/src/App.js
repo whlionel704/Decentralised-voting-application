@@ -33,6 +33,7 @@ function App() {
 
   },[]);
   
+  //HTML code which displays the frontend interface
   return (
     <Container className='App-header'>
       <meta name="name" content="whlionel704 - Frontend component" />
@@ -119,20 +120,22 @@ function App() {
     </Container>
   );
 
-  function handleConnectWalletClick() {
-    peraWallet.connect().then((newAccounts) => {
+    //Connect the perawallet to the frontend interface
+    function handleConnectWalletClick() {
+      peraWallet.connect().then((newAccounts) => {
       // setup the disconnect event listener
       peraWallet.connector?.on('disconnect', handleDisconnectWalletClick);
 
       setAccountAddress(newAccounts[0]);
     });
   }
-
+    //Disconnect the perawallet to the frontend interface
     function handleDisconnectWalletClick() {
       peraWallet.disconnect();
       setAccountAddress(null);
     }
 
+    //User opts into the application
     async function optInToApp() {
       const suggestedParams = await algod.getTransactionParams().do();
       const optInTxn = algosdk.makeApplicationOptInTxn(
@@ -149,6 +152,7 @@ function App() {
         const result = await waitForConfirmation(algod, txId, 2);
     }
   
+    //User opts out of the application
     async function closeOutApp() {
       const suggestedParams = await algod.getTransactionParams().do();
       const closeOutTxn = algosdk.makeApplicationCloseOutTxn(
@@ -165,6 +169,7 @@ function App() {
         const result = await waitForConfirmation(algod, txId, 2);
     }
 
+    //User does clear state
     async function clearStateApp() {
       const suggestedParams = await algod.getTransactionParams().do();
       const clearStateTxn = algosdk.makeApplicationClearStateTxn(
@@ -181,6 +186,7 @@ function App() {
         const result = await waitForConfirmation(algod, txId, 2);
     }
 
+    //Calls the application, similar to 'goal app call'
     async function callCounterApplication(action) {
       try {
         // get suggested params
