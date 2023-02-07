@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 // Create the PeraWalletConnect instance outside the component
 const peraWallet = new PeraWalletConnect();
 
-// The app ID on testnet
+// Testnet APP ID
 const appIndex = 157506021;
 
 // connect to the algorand node
