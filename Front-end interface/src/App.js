@@ -182,7 +182,7 @@ function App() {
         const result = await waitForConfirmation(algod, txId, 2);
     }
 
-    //Calls the application, similar to 'goal app call'
+    //Calls the application, similar to what 'goal app call' does 
     async function callCounterApplication(action) {
       try {
         // get suggested params
