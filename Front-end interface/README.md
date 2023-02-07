@@ -1,6 +1,6 @@
 # Setting up the React Front-end user interface
 
-This voting application project repository follows the same template used for our 2nd Algorand Lab, [Deploying to Testnet and Interacting with Smart Contracts in the Browser](https://github.com/Algo-Hub-io/pyteal-course/Lab2), except that to use the react app for this voting application, be prepared to do npm install first before doing npm start.
+This voting application project repository follows the same template used for Lab2 of the AlgoHub Pyteal course, [Deploying to Testnet and Interacting with Smart Contracts in the Browser](https://github.com/Algo-Hub-io/pyteal-course/Lab2), except that to use the react app for this voting application, be prepared to do npm install first before doing npm start.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
