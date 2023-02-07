@@ -79,7 +79,6 @@ function App() {
         <Row>
           <Col><Button className="button-vote" 
           onClick={
-          // add the local deduct method
             () => callCounterApplication('vote')
           }>
           Vote
@@ -89,7 +88,6 @@ function App() {
         <Row>
           <Col><Button className="button-update_scores" 
           onClick={
-          // add the local deduct method
             () => callCounterApplication('update_scores')
           }>
           Re-vote
@@ -99,7 +97,6 @@ function App() {
         <Row>
           <Col><Button className="button-close-out" 
           onClick={
-          // add the local deduct method
             () => closeOutApp()
           }>
           Close-out
@@ -109,7 +106,6 @@ function App() {
         <Row>
           <Col><Button className="button-clear-state" 
           onClick={
-          // add the local deduct method
             () => clearStateApp()
           }>
           Clear state
