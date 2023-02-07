@@ -4,7 +4,7 @@ In this repository, the smart contract represents a decentralised voting applica
 
 
 
-APP ID from the testnet: 156791600
+APP ID from the testnet: 157506021
 
 
 
