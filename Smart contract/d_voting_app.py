@@ -61,18 +61,21 @@ def approval_program():
     #This function will allow the voter to modify the scores assigned to each color. 
     #The voter is free to modify his scores as long as the voting period is still ongoing.
     update_scores = Seq([
-        voted_or_not,
+
         If(And(voted_or_not.hasValue(), Global.latest_timestamp() <= App.globalGet(Bytes("VoteEnd"))), Seq([
+
             App.globalPut(Bytes("TotalCountRed"), App.globalGet(Bytes("TotalCountRed")) - App.localGet(Int(0), Bytes("votedRed"))),
-            App.localPut(Int(0), Bytes("votedRed"), Btoi(Txn.application_args[1])),
-            App.globalPut(Bytes("TotalCountRed"), App.globalGet(Bytes("TotalCountRed")) + App.localGet(Int(0), Bytes("votedRed"))),
-
             App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) - App.localGet(Int(0), Bytes("votedYellow"))),
-            App.localPut(Int(0), Bytes("votedYellow"), Btoi(Txn.application_args[2])),
-            App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) + App.localGet(Int(0), Bytes("votedYellow"))),
-
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) - App.localGet(Int(0), Bytes("votedBlue"))),
+
+            App.localPut(Int(0), Bytes("votedRed"), Btoi(Txn.application_args[1])),
+            App.localPut(Int(0), Bytes("votedYellow"), Btoi(Txn.application_args[2])),
             App.localPut(Int(0), Bytes("votedBlue"), Btoi(Txn.application_args[3])),
+
+            assert(Btoi(Txn.application_args[1]) + Btoi(Txn.application_args[2]) + Btoi(Txn.application_args[3]) == Int(10)),
+
+            App.globalPut(Bytes("TotalCountRed"), App.globalGet(Bytes("TotalCountRed")) + App.localGet(Int(0), Bytes("votedRed"))),
+            App.globalPut(Bytes("TotalCountYellow"), App.globalGet(Bytes("TotalCountYellow")) + App.localGet(Int(0), Bytes("votedYellow"))),
             App.globalPut(Bytes("TotalCountBlue"), App.globalGet(Bytes("TotalCountBlue")) + App.localGet(Int(0), Bytes("votedBlue"))),
         ])),
         Return(Int(1))
