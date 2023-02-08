@@ -40,8 +40,12 @@ byte "TotalUsers"
 byte "TotalUsers"
 app_global_get
 int 1
--
++
 app_global_put
+int 0
+byte "voted"
+int 0
+app_local_put
 main_l2:
 int 1
 return

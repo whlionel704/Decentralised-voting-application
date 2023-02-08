@@ -2,27 +2,27 @@
 txn ApplicationID
 int 0
 ==
-bnz main_l22
+bnz main_l24
 txn OnCompletion
 int DeleteApplication
 ==
-bnz main_l21
+bnz main_l23
 txn OnCompletion
 int UpdateApplication
 ==
-bnz main_l20
+bnz main_l22
 txn OnCompletion
 int CloseOut
 ==
-bnz main_l17
+bnz main_l19
 txn OnCompletion
 int OptIn
 ==
-bnz main_l16
+bnz main_l18
 txna ApplicationArgs 0
 byte "updated_tf"
 ==
-bnz main_l15
+bnz main_l17
 txna ApplicationArgs 0
 byte "update_scores"
 ==
@@ -98,6 +98,12 @@ byte "votedBlue"
 txna ApplicationArgs 3
 btoi
 app_local_put
+byte "TotalUsers"
+byte "TotalUsers"
+app_global_get
+int 1
+-
+app_global_put
 int 0
 byte "voted"
 int 1
@@ -115,21 +121,49 @@ app_local_get_ex
 store 1
 store 0
 load 1
+!
+bnz main_l16
 global LatestTimestamp
 byte "VoteEnd"
 app_global_get
 <=
-&&
-bnz main_l14
-main_l13:
+bnz main_l15
+main_l14:
 int 1
 return
-main_l14:
+main_l15:
+txna ApplicationArgs 1
+btoi
+txna ApplicationArgs 2
+btoi
++
+txna ApplicationArgs 3
+btoi
++
+int 10
+==
+assert
 byte "TotalCountRed"
 byte "TotalCountRed"
 app_global_get
 int 0
 byte "votedRed"
+app_local_get
+-
+app_global_put
+byte "TotalCountYellow"
+byte "TotalCountYellow"
+app_global_get
+int 0
+byte "votedYellow"
+app_local_get
+-
+app_global_put
+byte "TotalCountBlue"
+byte "TotalCountBlue"
+app_global_get
+int 0
+byte "votedBlue"
 app_local_get
 -
 app_global_put
@@ -138,6 +172,16 @@ byte "votedRed"
 txna ApplicationArgs 1
 btoi
 app_local_put
+int 0
+byte "votedYellow"
+txna ApplicationArgs 2
+btoi
+app_local_put
+int 0
+byte "votedBlue"
+txna ApplicationArgs 3
+btoi
+app_local_put
 byte "TotalCountRed"
 byte "TotalCountRed"
 app_global_get
@@ -152,19 +196,6 @@ app_global_get
 int 0
 byte "votedYellow"
 app_local_get
--
-app_global_put
-int 0
-byte "votedYellow"
-txna ApplicationArgs 2
-btoi
-app_local_put
-byte "TotalCountYellow"
-byte "TotalCountYellow"
-app_global_get
-int 0
-byte "votedYellow"
-app_local_get
 +
 app_global_put
 byte "TotalCountBlue"
@@ -173,23 +204,13 @@ app_global_get
 int 0
 byte "votedBlue"
 app_local_get
--
-app_global_put
-int 0
-byte "votedBlue"
-txna ApplicationArgs 3
-btoi
-app_local_put
-byte "TotalCountBlue"
-byte "TotalCountBlue"
-app_global_get
-int 0
-byte "votedBlue"
-app_local_get
 +
 app_global_put
-b main_l13
-main_l15:
+b main_l14
+main_l16:
+int 0
+return
+main_l17:
 global LatestTimestamp
 byte "VoteEnd"
 app_global_get
@@ -218,7 +239,7 @@ app_global_get
 assert
 int 1
 return
-main_l16:
+main_l18:
 global LatestTimestamp
 byte "RegBegin"
 app_global_get
@@ -229,7 +250,7 @@ app_global_get
 <=
 &&
 return
-main_l17:
+main_l19:
 int 0
 global CurrentApplicationID
 byte "voted"
@@ -242,11 +263,11 @@ byte "VoteEnd"
 app_global_get
 <=
 &&
-bnz main_l19
-main_l18:
+bnz main_l21
+main_l20:
 int 1
 return
-main_l19:
+main_l21:
 byte "TotalCountRed"
 byte "TotalCountRed"
 app_global_get
@@ -275,22 +296,26 @@ byte "TotalUsers"
 byte "TotalUsers"
 app_global_get
 int 1
--
++
 app_global_put
-b main_l18
-main_l20:
-txn Sender
-byte "Creator"
-app_global_get
-==
-return
-main_l21:
-txn Sender
-byte "Creator"
-app_global_get
-==
-return
+int 0
+byte "voted"
+int 0
+app_local_put
+b main_l20
 main_l22:
+txn Sender
+byte "Creator"
+app_global_get
+==
+return
+main_l23:
+txn Sender
+byte "Creator"
+app_global_get
+==
+return
+main_l24:
 byte "Creator"
 txn Sender
 app_global_put
